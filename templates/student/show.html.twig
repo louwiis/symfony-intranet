@@ -33,6 +33,10 @@
                 <th>Zipcode</th>
                 <td>{{ student.address.postalCode }}</td>
             </tr>
+            <tr>
+                <th>Student average</th>
+                <td>{{ studentAverage }}</td>
+            </tr>
         </tbody>
     </table>
     <a href="{{ path('student_edit', {'studentId': student.id, 'schoolId': schoolId}) }}">edit</a>

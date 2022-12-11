@@ -40,6 +40,8 @@ class GradeController extends AbstractController
         $grade = $this->gradeRepository->find($gradeId);
 
         $studentGrades = [];
+        $totalGrade = 0;
+        $numberOfStudents = 0;
         foreach ($grade->getClasse()->getStudents() as $student) {
             $studentGrade = $this->studentGradeRepository->findOneBy(['student' => $student, 'grade' => $grade]);
             if ($studentGrade) {
@@ -47,6 +49,9 @@ class GradeController extends AbstractController
                     'student' => $studentGrade->getStudent(),
                     'score' => $studentGrade->getScore(),
                 ];
+
+                $totalGrade += $studentGrade->getScore();
+                $numberOfStudents++;
             } else {
                 $studentGrades[] = [
                     'student' => $student,
@@ -54,12 +59,19 @@ class GradeController extends AbstractController
                 ];
             }
         }
+
+        if ($numberOfStudents > 0) {
+            $studentsAverage = $totalGrade/$numberOfStudents . '/20';
+        } else {
+            $studentsAverage = 'No grades yet';
+        }
         
         return $this->render('grade/show.html.twig', [
             'grade' => $grade,
             'activePage' => 'grade',
             'schoolId' => $schoolId,
             'studentGrades' => $studentGrades,
+            'studentsAverage' => $studentsAverage,
         ]);
     }
 

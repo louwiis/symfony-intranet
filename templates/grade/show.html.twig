@@ -33,6 +33,10 @@
                     {% endfor %}
                 </td>
             </tr>
+            <tr>
+                <th>Students average</th>
+                <td>{{ studentsAverage }}</td>
+            </tr>
         </tbody>
     </table>
     <a href="{{ path('grade_edit', {'gradeId': grade.id, 'schoolId': schoolId}) }}" class="text-primary">edit</a>

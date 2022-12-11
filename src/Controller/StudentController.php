@@ -7,6 +7,7 @@ use App\Form\StudentType;
 use App\Form\AddressType;
 use App\Form\ClasseType;
 use App\Repository\StudentRepository;
+use App\Repository\StudentGradeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,10 +19,12 @@ use Symfony\Component\HttpFoundation\Request;
 class StudentController extends AbstractController
 {
     private StudentRepository $studentRepository;
+    private StudentGradeRepository $studentGradeRepository;
 
-    public function __construct(StudentRepository $studentRepository)
+    public function __construct(StudentRepository $studentRepository, StudentGradeRepository $studentGradeRepository)
     {
         $this->studentRepository = $studentRepository;
+        $this->studentGradeRepository = $studentGradeRepository;
     }
 
     #[Route('/{schoolId}/student', name: 'student_index')]
@@ -48,11 +51,24 @@ class StudentController extends AbstractController
     public function show(int $schoolId, int $studentId): Response
     {
         $student = $this->studentRepository->find($studentId);
+        $studentGrades = $this->studentGradeRepository->findAllByStudentId($studentId);
+        $totalGrade = 0;
+
+        foreach ($studentGrades as $studentGrade) {
+            $totalGrade += $studentGrade->getScore();
+        }
+
+        if (sizeof($studentGrades) !== 0) {
+            $studentAverage = $totalGrade/sizeof($studentGrades) . '/20';
+        } else {
+            $studentAverage = 'No grades yet';
+        }
 
         return $this->render('student/show.html.twig', [
             'student' => $student,
             'activePage' => 'student',
             'schoolId' => $schoolId,
+            'studentAverage' => $studentAverage,
         ]);
     }
 

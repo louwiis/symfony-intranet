@@ -48,6 +48,15 @@ class StudentGradeRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findAllByStudentId(int $studentId): array
+    {
+        return $this->createQueryBuilder('sg')
+            ->andWhere('sg.student = :studentId')
+            ->setParameter('studentId', $studentId)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return StudentGrade[] Returns an array of StudentGrade objects
 //     */
