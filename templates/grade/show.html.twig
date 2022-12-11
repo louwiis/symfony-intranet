@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Show grade!{% endblock %}
+
+{% block schoolId %}{{ schoolId }}{% endblock %}
+
+{% block body %}
+<div class="col-d-8">
+    <h1>Grade</h1>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ grade.name }}</td>
+            </tr>
+            <tr>
+                <th>School</th>
+                <td>{{ grade.classe.name }}</td>
+            </tr>
+            <tr>
+                <th>Student grades</th>
+                <td>
+                    {% for studentGrade in studentGrades %}
+                        {% if studentGrade.score == null %}
+                            <p>{{ studentGrade.student.firstname }} {{ studentGrade.student.lastname}}: No grade.
+                                <a href="{{ path('studentGrade_new', {'studentId': studentGrade.student.id, 'gradeId': grade.id, 'schoolId': schoolId}) }}" class="text-primary">Add grade</a>
+                            </p>
+                        {% else %}
+                            <p>{{ studentGrade.student.firstname }} {{ studentGrade.student.lastname}}: {{ studentGrade.score }}
+                                <a href="{{ path('studentGrade_edit', {'studentId': studentGrade.student.id, 'schoolId': schoolId, 'gradeId': grade.id}) }}" class="text-primary">Edit grade</a>
+                            </p>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Students average</th>
+                <td>{{ studentsAverage }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{{ path('grade_edit', {'gradeId': grade.id, 'schoolId': schoolId}) }}" class="text-primary">edit</a>
+    <a href="{{ path('grade_delete', {'gradeId': grade.id, 'schoolId': schoolId}) }}" class="text-primary">delete</a>
+</div>
+{% endblock %}

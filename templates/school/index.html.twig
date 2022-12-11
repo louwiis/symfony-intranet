@@ -1,0 +1,37 @@
+{% extends 'alternativeBase.html.twig' %}
+
+{% block title %}Every schools!{% endblock %}
+
+{% block body %}
+<div class="col-d-8">
+		<h3 class="pb-4 mb-4 fst-italic border-bottom">
+			Schools
+		</h3>
+
+		<article class="blog-post w-100">
+			<p>if you want to add a new school, <a href="{{ path('school_new') }}" class="text-primary">click here</a>.</p>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for school in schools %}
+					<tr>
+							<td><a href="{{ path('classe_index', {'schoolId': school.id}) }}" class="text-primary">{{ school.name }}</a></td>
+							<td>
+								<a href="{{ path('school_show', {'schoolId': school.id}) }}" class="text-primary">show</a>
+								<a href="{{ path('school_edit', {'schoolId': school.id}) }}" class="text-primary">edit</a>
+							</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</article>
+
+
+	</div>
+{% endblock %}

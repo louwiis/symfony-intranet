@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Every students!{% endblock %}
+
+{% block schoolId %}{{ schoolId }}{% endblock %}
+
+{% block body %}
+<div class="col-d-8">
+		<h3 class="pb-4 mb-4 fst-italic border-bottom">
+			Students
+		</h3>
+
+		<article class="blog-post w-100">
+			<p>if you want to add a new student, <a href="{{ path('student_new', {'schoolId': schoolId}) }}" class="text-primary">click here</a>.</p>
+
+			<form method="get" class="d-flex gap-2 align-items-end" action="{{ path('student_index', {'schoolId': schoolId, 'search': search, 'searchMode': searchMode}) }}">
+				<div class="form-group" style="width: 200px;">
+					<label for="searchMode">Search Mode</label>
+					<select class="form-control" id="searchMode" name="searchMode">
+						<option value="firstname" {% if searchMode == 'firstname' %}selected{% endif %}>Firstname</option>
+						<option value="lastname" {% if searchMode == 'lastname' %}selected{% endif %}>Lastname</option>
+						<option value="email" {% if searchMode == 'email' %}selected{% endif %}>Email</option>
+					</select>
+				</div>
+				<div class="form-group" style="width: 200px;">
+					<label for="search">Search</label>
+					<input type="text" class="form-control" id="search" name="search" value="{{ search }}">
+				</div>
+				<button type="submit" class="btn btn-primary">Search</button>
+			</form>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Fullname</th>
+						<th>Email</th>
+						<th>Birth date</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for student in students %}
+					<tr>
+							<td>{{ student.firstname }} {{ student.lastname }}</td>
+							<td>{{ student.email }}</td>
+							<td>{{ student.birthdate | date('Y-m-d')}}</td>
+							<td>
+								<a href="{{ path('student_show', {'studentId': student.id, 'schoolId': schoolId}) }}" class="text-primary">show</a>
+								<a href="{{ path('student_edit', {'studentId': student.id, 'schoolId': schoolId}) }}" class="text-primary">edit</a>
+							</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</article>
+
+
+	</div>
+{% endblock %}

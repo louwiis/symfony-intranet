@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Show classe!{% endblock %}
+
+{% block schoolId %}{{ schoolId }}{% endblock %}
+
+{% block body %}
+<div class="col-d-8">
+    <h1>Classe</h1>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ classe.name }}</td>
+            </tr>
+            <tr>
+                <th>School</th>
+                <td>{{ classe.school.name }}</td>
+            </tr>
+            <tr>
+                <th>Students</th>
+                <td>
+                    {% if classe.students is empty %}
+                        <a href="{{ path('student_new', {'schoolId': schoolId, 'classeId': classe.id}) }}" class="text-primary">Add a student</a>
+                        {% else %}
+                            <ul>
+                            {% for student in classe.students %}
+                                <li><a href="{{ path('student_show', {'studentId': student.id, 'schoolId': schoolId}) }}" class="text-primary">{{ student.firstname }} {{ student.lastname }}</a></li>
+                            {% endfor %}
+                            </ul>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{{ path('classe_edit', {'classeId': classe.id, 'schoolId': schoolId}) }}" class="text-primary">edit</a>
+    <a href="{{ path('classe_delete', {'classeId': classe.id, 'schoolId': schoolId}) }}" class="text-primary">delete</a>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'alternativeBase.html.twig' %}
+
+{% block title %}Edit student!{% endblock %}
+
+{% block body %}
+<div class="col-d-8">
+    <h1>Edit student</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-primary">Save</button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'alternativeBase.html.twig' %}
+
+{% block title %}Show school!{% endblock %}
+
+{% block body %}
+<div class="col-d-8">
+    <h1>School</h1>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ school.name }}</td>
+            </tr>
+            <tr>
+                <th>Classes</th>
+                <td>
+                    <ul>
+                        {% for classe in school.classes %}
+                            <li><a href="{{ path('classe_show', {'classeId': classe.id, 'schoolId': school.id}) }}" class="text-primary">{{ classe.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{{ path('school_edit', {'schoolId': school.id}) }}">edit</a>
+    <a href="{{ path('school_delete', {'schoolId': school.id}) }}">delete</a>
+</div>
+{% endblock %}
