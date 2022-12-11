@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Show student!{% endblock %}
+
+{% block schoolId %}{{ schoolId }}{% endblock %}
+
+{% block body %}
+<div class="col-d-8">
+    <h1>Student</h1>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ student.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ student.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ student.email }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ student.address.street }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ student.address.city }}</td>
+            </tr>
+            <tr>
+                <th>Zipcode</th>
+                <td>{{ student.address.postalCode }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{{ path('student_edit', {'studentId': student.id, 'schoolId': schoolId}) }}">edit</a>
+    <a href="{{ path('student_delete', {'studentId': student.id, 'schoolId': schoolId}) }}">delete</a>
+</div>
+{% endblock %}

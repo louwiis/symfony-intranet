@@ -32,35 +32,19 @@
 			<div class="h-100 d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
 				<ul class="nav nav-pills flex-column mb-auto">
 					<li>
-						<a href="/{{ block('schoolId') }}/classe" class="{{ activePage=='classe' ? 'active' :'link-dark' }} nav-link">
+						<a href="/" class="{{ activePage=='home' ? 'active' :'link-dark' }} nav-link">
 							<svg class="bi pe-none me-2" width="16" height="16">
 								<use xlink:href="#table"></use>
 							</svg>
-							Classes
+							Home
 						</a>
 					</li>
 					<li>
-						<a href="/{{ block('schoolId') }}/lesson" class="{{ activePage=='lesson' ? 'active' :'link-dark' }} nav-link">
+						<a href="/school-add" class="{{ activePage=='newSchool' ? 'active' :'link-dark' }} nav-link">
 							<svg class="bi pe-none me-2" width="16" height="16">
-								<use xlink:href="#speedometer2"></use>
+								<use xlink:href="#table"></use>
 							</svg>
-							Lessons
-						</a>
-					</li>
-					<li>
-						<a href="/{{ block('schoolId') }}/student" class="{{ activePage=='student' ? 'active' :'link-dark' }} nav-link">
-							<svg class="bi pe-none me-2" width="16" height="16">
-								<use xlink:href="#speedometer2"></use>
-							</svg>
-							Students
-						</a>
-					</li>
-					<li>
-						<a href="/{{ block('schoolId') }}/grade" class="{{ activePage=='grade' ? 'active' :'link-dark' }} nav-link">
-							<svg class="bi pe-none me-2" width="16" height="16">
-								<use xlink:href="#speedometer2"></use>
-							</svg>
-							Grades
+							Create a school
 						</a>
 					</li>
 				</ul>

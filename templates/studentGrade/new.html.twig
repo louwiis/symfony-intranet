@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New grade!{% endblock %}
+
+{% block schoolId %}{{ schoolId }}{% endblock %}
+
+{% block body %}
+<div class="col-d-8">
+    <h1>Create a new grade for the student</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

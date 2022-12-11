@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Every grades!{% endblock %}
+
+{% block schoolId %}{{ schoolId }}{% endblock %}
+
+{% block body %}
+<div class="col-d-8">
+		<h3 class="pb-4 mb-4 fst-italic border-bottom">
+			Grades
+		</h3>
+
+		<article class="blog-post w-100">
+			<p>if you want to add a new grade, <a href="{{ path('grade_new', {'schoolId': schoolId}) }}" class="text-primary">click here</a>.</p>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>School</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for grade in grades %}
+					<tr>
+							<td>{{ grade.name }}</td>
+							<td>{{ grade.classe.name }}</td>
+							<td>
+								<a href="{{ path('grade_show', {'gradeId': grade.id, 'schoolId': schoolId}) }}" class="text-primary">show</a>
+								{# <a href="{{ path('grade_edit', {'gradeId': grade.id, 'schoolId': schoolId}) }}" class="text-primary">edit</a> #}
+							</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</article>
+
+
+	</div>
+{% endblock %}
